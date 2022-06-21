@@ -61,12 +61,13 @@ def start(help):
 def button(go):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
     chapter = types.KeyboardButton('Hовая запись')
+    dowload_doc = types.KeyboardButton('Скачать')
     a = types.KeyboardButton('(A) Ситуация')
     b = types.KeyboardButton('(B) Мысли')
     c = types.KeyboardButton('(С) Эмоция и её сила')
     d = types.KeyboardButton('(D) Ощущения в теле')
     e = types.KeyboardButton('(E) Поведение')
-    markup.add(chapter, a, b, c, d, e)
+    markup.add(a, b, c, d, e, chapter, dowload_doc)
     tokenbot.send_message(go.chat.id, 'Кнопки сформированы\nНажмите кнопку «Ситауция» и расскажите что произошло',
                           reply_markup=markup)
 
@@ -94,6 +95,9 @@ def tap_button(tap):
     if tap.text == '(E) Поведение':
         tokenbot.register_next_step_handler(tap, user_mess)
         column_num += 1
+    if tap.text == 'Скачать':
+        doc = open('my_book.xlsx', 'rb')
+        tokenbot.send_document(tap.chat.id, doc)
 
 
 def user_mess(ms):
