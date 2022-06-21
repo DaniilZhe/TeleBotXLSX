@@ -36,11 +36,11 @@ help_text = '''Пример заполнения таблицы.
 Молчала всю дорогу до работы.
 '''
 
-#   Создание файла xlsx
+#   Создание таблицы формата xlsx
 book: Workbook = openpyxl.Workbook()
 sheet = book.active
 
-'''Номера ячеек по умолчанию'''
+'''Номера ячеек таблицы по умолчанию'''
 column_num = 1
 row_num = 3
 
@@ -72,6 +72,7 @@ def button(go):
                           reply_markup=markup)
 
 
+#   Отслеживание нажатий кнопок
 @tokenbot.message_handler(content_types=['text'])
 def tap_button(tap):
     global column_num
@@ -100,6 +101,7 @@ def tap_button(tap):
         tokenbot.send_document(tap.chat.id, doc)
 
 
+#   Запись данных от пользователя в таблицу
 def user_mess(ms):
     sheet.cell(column=column_num, row=row_num).value = ms.text
     # sheet['A4'] = ms.text
