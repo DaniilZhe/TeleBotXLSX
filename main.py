@@ -3,7 +3,7 @@ import telebot
 from openpyxl import workbook
 from telebot import types
 
-token = telebot.TeleBot('5567917612:AAFqPqeKOSVuDYWRepZVaZ5hS9aUKpACmCc')
+token = telebot.TeleBot('')
 
 #   TEXT VARIABLE
 
